@@ -84,6 +84,6 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ---
 
-📧 **Contact:** Your Name | arnav.worko@gmail.com
+📧 **Contact:** Arnav Khamparia | arnav.worko@gmail.com
 📌 **License:** MIT  
 
