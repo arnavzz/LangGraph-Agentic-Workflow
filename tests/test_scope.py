@@ -1,5 +1,5 @@
 import pytest
-from graph_agent import validate_scope
+from Scripts.graph_agent import validate_scope
 
 
 def test_validate_scope_allowed():

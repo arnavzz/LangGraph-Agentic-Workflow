@@ -1,5 +1,5 @@
 import pytest
-from graph_agent import run_command
+from Scripts.graph_agent import run_command
 
 def test_run_command_success():
     result = run_command("echo Hello")

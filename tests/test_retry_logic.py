@@ -1,5 +1,5 @@
 import pytest
-from graph_agent import handle_failure
+from Scripts.graph_agent import handle_failure
 
 def test_handle_failure_max_retries():
     task = {"command": "invalidcommand"}
