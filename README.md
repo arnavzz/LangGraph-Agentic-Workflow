@@ -66,13 +66,13 @@ Execute the main script:
 python graph_agent.py 
 ```
 
-### **4 Running Tests
+### 4️⃣ Running Tests
 Unit tests are implemented using pytest. Run:
 ```bash
 pytest tests
 ```
 
-### **5️⃣ Monitoring via Streamlit
+### 5️⃣ Monitoring via Streamlit
 To visualize execution logs :
 ```bash
 streamlit run monitor.py
