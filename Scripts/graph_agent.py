@@ -11,7 +11,7 @@ from typing import TypedDict, List, Dict, Any
 
 # Load environment variables
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")  # Use a generic variable name
+GROQ_API_KEY = os.getenv("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")  # Use a generic variable name
 
 # Initialize Groq LLM
 llm = ChatGroq(model_name="mixtral-8x7b-32768", api_key=GROQ_API_KEY)
