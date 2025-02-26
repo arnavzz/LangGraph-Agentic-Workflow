@@ -58,4 +58,6 @@ st.warning(f"⚠ Scope Violations: {', '.join(audit_report['Scope Violations'])}
 st.error(f"🛑 Vulnerabilities Found: {', '.join(audit_report['Vulnerabilities Found'])}")
 
 # Auto-refresh every 10 seconds
-st_autorefresh(interval=10 * 1000, key="refresh")
+count= st_autorefresh(interval=10 * 1000, key="refresh")
+st.title("Real-Time Task Monitoring")
+st.write(f"Page refreshed {count} times.")
