@@ -321,11 +321,11 @@ def log_message(message):
     except Exception as e:
         st.error(f"Error writing to log file: {str(e)}")
 
-# ---- Generate Tasks ----
+# Generate task
 def generate_tasks(instruction, target):
     """Uses Groq API to generate a task list."""
-    # Updated system prompt with clearer instructions
-    system_prompt = (
+    
+    system_prompt = (                                        # Prompt for clear instruction
         "You are a cybersecurity AI. Generate a structured task list in JSON format as a list of dictionaries. "
         "Each dictionary should contain 'step' (int), 'tool' (str), 'command' (str), and 'target' (str). "
         "The 'command' field should only include the arguments/options, not the tool name (e.g., '-p 1-1000 -sV' for nmap). "
@@ -368,13 +368,13 @@ def generate_tasks(instruction, target):
             if task["tool"].lower() not in ["nmap", "ffuf", "sqlmap", "gobuster"]:
                 raise ValueError(f"Unsupported tool: {task['tool']}")
             
-            # Ensure steps are unique and sequential
+           
             task["step"] = int(task["step"])
         
         # Sort tasks by step
         task_list.sort(key=lambda x: x["step"])
         
-        # Fix step numbers to be sequential
+        
         for i, task in enumerate(task_list):
             task["step"] = i + 1
         
@@ -385,7 +385,7 @@ def generate_tasks(instruction, target):
         # Fallback to simple task
         return [{"step": 1, "tool": "nmap", "command": f"-Pn -p 80,443 {target}", "target": target}]
 
-# ---- Streamlit UI ----
+# UI for streamlit 
 st.title("🔍 Cybersecurity Scanner Dashboard")
 st.sidebar.header("⚙️ Scanner Settings")
 
@@ -404,7 +404,7 @@ with st.sidebar.expander("Advanced Settings"):
 
 start_scan = st.sidebar.button("🚀 Start Scan")
 
-# Session state
+# 
 if "agent_state" not in st.session_state:
     st.session_state.agent_state = {
         "task_list": [],
@@ -426,7 +426,7 @@ graph.set_entry_point("execute_task")
 graph.add_conditional_edges("execute_task", should_continue)
 agent = graph.compile()
 
-# ---- Run Scan ----
+# RUN SCAN
 if start_scan:
     if not validate_scope(target):
         st.error("🚫 Target is OUT OF SCOPE!")
@@ -436,11 +436,11 @@ if start_scan:
         task_list = generate_tasks(instruction, target)
         
         if task_list and len(task_list) > 0:
-            # Update global timeouts from UI
+            # Update global timeouts from UI that takes user input
             COMMAND_TIMEOUT = command_timeout
             TASK_TIMEOUT = task_timeout
             
-            # Set up state
+            
             st.session_state.agent_state["task_list"] = task_list
             st.session_state.agent_state["task_status"] = {task["step"]: "Pending" for task in task_list}
             st.session_state.agent_state["task_outputs"] = {}
@@ -459,7 +459,7 @@ if start_scan:
         else:
             st.error("No valid tasks were generated.")
 
-# ---- Real-Time Task List Visualization ----
+#  Real-Time Task List Visualization 
 st.subheader("📋 Dynamic Task List")
 if st.session_state.agent_state["task_status"]:
     task_data = []
@@ -468,7 +468,7 @@ if st.session_state.agent_state["task_status"]:
         task_info = next((t for t in st.session_state.agent_state["task_list"] if t.get("step") == step), None)
         
         if not task_info:
-            # Look for task in completed tasks that might have been removed from task_list
+            
             command = "N/A"
             tool = "unknown"
         else:
@@ -490,7 +490,7 @@ if st.session_state.agent_state["task_status"]:
         "Status": st.column_config.TextColumn("Status", help="Task status: Pending, Running, Completed, Failed")
     })
 
-# ---- Dashboard ----
+#  Dashboard 
 st.subheader("📊 Scan Progress")
 logs = []
 try:
@@ -512,11 +512,11 @@ with col2:
 with col3:
     st.metric(label="❌ Failed Tasks", value=failed_tasks)
 
-# ---- Task Logs ----
+# Task Logs 
 st.subheader("📜 Task Logs")
 st.text_area("Execution Logs", "\n".join(logs[-20:]) if logs else "No logs available", height=300)
 
-# ---- Final Audit Report ----
+#  Final Audit Report 
 st.subheader("📑 Final Audit Report")
 if st.session_state.agent_state["task_status"]:
     st.write(f"**Scan Target:** {target}")
