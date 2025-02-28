@@ -67,3 +67,196 @@ shared
 [2025-02-28 17:17:25] All tasks completed or failed
 [2025-02-28 17:17:25] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
 [2025-02-28 17:17:25] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:31:03] Raw API response: [
+  {
+    "step": 1,
+    "tool": "nmap",
+    "command": "-p 80,443,22,8080,8443 -sV -O --host scanme.nmap.org",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 2,
+    "tool": "gobuster",
+    "command": "dir -u http://scanme.nmap.org -w common.txt",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 3,
+    "tool": "ffuf",
+    "command": "-u http://scanme.nmap.org/FUZZ -w common.txt -fs 100",
+    "target": "scanme.nmap.org"
+  }
+]
+[2025-02-28 17:31:03] Starting task 1: nmap -p 80,443,22,8080,8443 -sV -O --host scanme.nmap.org
+[2025-02-28 17:31:03] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:31:03] Starting task 2: gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt"
+[2025-02-28 17:31:03] ?? [RETRY] nmap -p 80,443,22,8080,8443 -sV -O --host scanme.nmap.org - Previous error: Bogus --host-timeout argument specified
+QUITTING!
+
+[2025-02-28 17:31:04] ? [FAILED] nmap -p 80,443,22,8080,8443 -sV -O --host scanme.nmap.org
+[2025-02-28 17:31:04] Output: Bogus --host-timeout argument specified
+QUITTING!
+
+[2025-02-28 17:31:04] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:31:04] Starting task 3: ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -fs 100
+[2025-02-28 17:31:41] ? [COMPLETED] ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -fs 100
+[2025-02-28 17:31:41] Output: 
+
+.htaccess               [Status: 403, Size: 291, Words: 21, Lines: 11, Duration: 308ms]
+
+
+.htpasswd               [Status: 403, Size: 291, Words: 21, Lines: 11, Duration: 313ms]
+
+
+.svn                    [Status: 301, Size: 316, Words: 20, Lines: 10, Duration: 313ms]
+
+
+.hta                    [Status: 403, Size: 286, Words: 21, Lines: 11, Duration: 320ms]
+
+
+.svn/entries            [Status: 403, Size: 294, Words: 21, Lines: 11, Duration: 319ms]
+
+
+favicon.ico             [Status: 403, Size: 293, Words: 21, Lines: 11, Duration: 275ms]
+
+
+images                  [Status: 301, Size: 318, Words: 20, Lines: 10, Duration: 593ms]
+
+
+index                   [Status: 200, Size: 6974, Words: 495, Lines: 153, Duration: 269ms]
+
+
+index.html              [Status: 200, Size: 6974, Words: 495, Lines: 153, Duration: 274ms]
+
+
+server-status           [Status: 403, Size: 295, Words: 21, Lines: 11, Duration: 306ms]
+
+
+shared                  [Status: 301, Size: 318, Words: 20, Lines: 10, Duration: 306ms]
+
+[2025-02-28 17:33:03] ?? [RETRY] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" - Previous error: Command timed out after 120 seconds
+[2025-02-28 17:34:30] ? [COMPLETED] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt"
+[2025-02-28 17:34:30] Output: ===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://scanme.nmap.org
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                C:\Users\share\wordlists\dirb\common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+
+
+/.hta                 (Status: 403) [Size: 286]
+
+
+/.htaccess            (Status: 403) [Size: 291]
+
+
+/.htpasswd            (Status: 403) [Size: 291]
+
+
+/.svn                 (Status: 301) [Size: 316] [--> http://scanme.nmap.org/.svn/]
+
+
+/.svn/entries         (Status: 403) [Size: 294]
+
+
+/favicon.ico          (Status: 403) [S
+... (output truncated)
+[2025-02-28 17:34:30] All tasks completed or failed
+[2025-02-28 17:34:31] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:34:31] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:39:26] Raw API response: [
+  {
+    "step": 1,
+    "tool": "nmap",
+    "command": "-p 80,443,22,8080,8443 -sV -O -T4",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 2,
+    "tool": "gobuster",
+    "command": "dir -u http://scanme.nmap.org -w common.txt -t 20 -x html,php,aspx,jsp",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 3,
+    "tool": "ffuf",
+    "command": "-u http://scanme.nmap.org/FUZZ -w common.txt -H 'User-Agent: Mozilla/5.0' -t 20 -fc 404",
+    "target": "scanme.nmap.org"
+  }
+]
+[2025-02-28 17:39:26] Starting task 1: nmap -p 80,443,22,8080,8443 -sV -O -T4 scanme.nmap.org
+[2025-02-28 17:39:26] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:39:26] Starting task 2: gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,aspx,jsp
+[2025-02-28 17:39:47] ? [COMPLETED] nmap -p 80,443,22,8080,8443 -sV -O -T4 scanme.nmap.org
+[2025-02-28 17:39:47] Output: Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-28 17:39 India Standard Time
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.32s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT     STATE  SERVICE    VERSION
+22/tcp   open   ssh        OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+80/tcp   open   http       Apache httpd 2.4.7 ((Ubuntu))
+443/tcp  closed https
+8080/tcp closed http-proxy
+8443/tcp closed https-alt
+Device type: general purpose
+Running: Linux 4.X
+OS CPE: cpe:/o:linux:linux_kernel:4
+OS details: Linux 4.19 - 5.15
+Network Distance: 22 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.59 seconds
+
+[2025-02-28 17:39:47] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:39:47] Starting task 3: ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -H 'User-Agent: Mozilla/5.0' -t 20 -fc 404
+[2025-02-28 17:40:24] ? [COMPLETED] ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -H 'User-Agent: Mozilla/5.0' -t 20 -fc 404
+[2025-02-28 17:40:24] Output: 
+
+.svn/entries            [Status: 403, Size: 294, Words: 21, Lines: 11, Duration: 284ms]
+
+
+.hta                    [Status: 403, Size: 286, Words: 21, Lines: 11, Duration: 296ms]
+
+
+.htaccess               [Status: 403, Size: 291, Words: 21, Lines: 11, Duration: 294ms]
+
+
+.htpasswd               [Status: 403, Size: 291, Words: 21, Lines: 11, Duration: 292ms]
+
+
+.svn                    [Status: 301, Size: 316, Words: 20, Lines: 10, Duration: 292ms]
+
+
+favicon.ico             [Status: 403, Size: 293, Words: 21, Lines: 11, Duration: 265ms]
+
+
+images                  [Status: 301, Size: 318, Words: 20, Lines: 10, Duration: 273ms]
+
+
+index.html              [Status: 200, Size: 6974, Words: 495, Lines: 153, Duration: 280ms]
+
+
+index                   [Status: 200, Size: 6974, Words: 495, Lines: 153, Duration: 279ms]
+
+
+server-status           [Status: 403, Size: 295, Words: 21, Lines: 11, Duration: 270ms]
+
+
+shared                  [Status: 301, Size: 318, Words: 20, Lines: 10, Duration: 272ms]
+
+[2025-02-28 17:41:26] ?? [RETRY] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,aspx,jsp - Previous error: Command timed out after 120 seconds
+[2025-02-28 17:43:26] ? [FAILED] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,aspx,jsp
+[2025-02-28 17:43:26] Output: Command timed out after 120 seconds
+[2025-02-28 17:43:26] All tasks completed or failed
+[2025-02-28 17:43:27] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:43:27] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
