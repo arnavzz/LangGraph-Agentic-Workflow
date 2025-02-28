@@ -1,8 +1,69 @@
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p 80,443 scanme.nmap.org"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-25 20:45 India Standard Time\nNmap done: 0 IP addresses (0 hosts up) scanned in 0.07 seconds\n"}}
-{"task": {"step": 2, "tool": "gobuster", "command": "gobuster dir -u http://scanme.nmap.org -w common.txt"}, "result": {"status": "failed", "output": "Max retries reached"}}
-{"task": {"step": 3, "tool": "sqlmap", "command": "sqlmap -u http://your-test-site.com/login.php --dbs"}, "result": {"status": "failed", "output": "Max retries reached"}}
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p 80,443 example.com"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-25 23:22 India Standard Time\nNmap scan report for example.com (23.215.0.136)\nHost is up (0.51s latency).\nOther addresses for example.com (not scanned): 2600:1408:ec00:36::1736:7f31 2600:1406:3a00:21::173e:2e65 2600:1406:3a00:21::173e:2e66 2600:1406:bc00:53::b81e:94c8 2600:1406:bc00:53::b81e:94ce 2600:1408:ec00:36::1736:7f24 23.215.0.138 96.7.128.175 96.7.128.198 23.192.228.80 23.192.228.84\nrDNS record for 23.215.0.136: a23-215-0-136.deploy.static.akamaitechnologies.com\n\nPORT    STATE SERVICE\n80/tcp  open  http\n443/tcp open  https\n\nNmap done: 1 IP address (1 host up) scanned in 1.26 seconds\n"}}
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p- scanme.nmap.org"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-26 00:13 India Standard Time\nNmap done: 0 IP addresses (0 hosts up) scanned in 2.13 seconds\n"}}
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p- scanme.nmap.org"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-26 00:29 India Standard Time\nNmap done: 1 IP address (0 hosts up) scanned in 3.05 seconds\n"}}
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p- scanme.nmap.org", "target": "scanme.nmap.org"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-26 00:48 India Standard Time\nNmap done: 1 IP address (0 hosts up) scanned in 1.05 seconds\n"}}
-{"task": {"step": 1, "tool": "nmap", "command": "nmap -Pn -p 80,443 scanme.nmap.org", "target": "scanme.nmap.org"}, "result": {"status": "success", "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-26 19:56 India Standard Time\nNmap done: 0 IP addresses (0 hosts up) scanned in 0.12 seconds\n"}}
+--- Logs Cleared ---
+[2025-02-28 17:16:02] Raw API response: [
+  {
+    "step": 1,
+    "tool": "nmap",
+    "command": "-p 80,443,22,8080,8443 -sV -O -T4 scanme.nmap.org",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 2,
+    "tool": "gobuster",
+    "command": "dir -u http://scanme.nmap.org -w common.txt -t 20 -x html,php,txt -s 200,301,302,307,403",
+    "target": "scanme.nmap.org"
+  },
+  {
+    "step": 3,
+    "tool": "ffuf",
+    "command": "-u http://scanme.nmap.org/FUZZ -w common.txt -t 20 -s 200,301,302,307,403 -fc 404",
+    "target": "scanme.nmap.org"
+  }
+]
+[2025-02-28 17:16:02] Starting task 1: nmap -p 80,443,22,8080,8443 -sV -O -T4 scanme.nmap.org
+[2025-02-28 17:16:02] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:16:02] Starting task 2: gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,txt -s 200,301,302,307,403
+[2025-02-28 17:16:02] ?? [RETRY] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,txt -s 200,301,302,307,403 - Previous error: Error: error on parsing arguments: status-codes ("200,301,302,307,403") and status-codes-blacklist ("404") are both set - please set only one. status-codes-blacklist is set by default so you might want to disable it by supplying an empty string.
+
+[2025-02-28 17:16:02] ? [FAILED] gobuster dir -u http://scanme.nmap.org -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -x html,php,txt -s 200,301,302,307,403
+[2025-02-28 17:16:02] Output: Error: error on parsing arguments: status-codes ("200,301,302,307,403") and status-codes-blacklist ("404") are both set - please set only one. status-codes-blacklist is set by default so you might want to disable it by supplying an empty string.
+
+[2025-02-28 17:16:02] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:16:02] Starting task 3: ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -s 200,301,302,307,403 -fc 404
+[2025-02-28 17:16:17] ? [COMPLETED] nmap -p 80,443,22,8080,8443 -sV -O -T4 scanme.nmap.org
+[2025-02-28 17:16:17] Output: Starting Nmap 7.95 ( https://nmap.org ) at 2025-02-28 17:16 India Standard Time
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.31s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT     STATE  SERVICE    VERSION
+22/tcp   open   ssh        OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+80/tcp   open   http       Apache httpd 2.4.7 ((Ubuntu))
+443/tcp  closed https
+8080/tcp closed http-proxy
+8443/tcp closed https-alt
+Device type: general purpose
+Running: Linux 4.X
+OS CPE: cpe:/o:linux:linux_kernel:4
+OS details: Linux 4.19 - 5.15
+Network Distance: 22 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 14.10 seconds
+
+[2025-02-28 17:17:25] ? [COMPLETED] ffuf -u http://scanme.nmap.org/FUZZ -w "C:\Users\share\wordlists\dirb\common.txt" -t 20 -s 200,301,302,307,403 -fc 404
+[2025-02-28 17:17:25] Output: .htpasswd
+.hta
+.htaccess
+.svn/entries
+.svn
+favicon.ico
+images
+index
+index.html
+server-status
+shared
+
+[2025-02-28 17:17:25] All tasks completed or failed
+[2025-02-28 17:17:25] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt
+[2025-02-28 17:17:25] Wordlist path updated: C:\\Users\\share\\wordlists\\dirb\\common.txt

@@ -1,0 +1,1 @@
+# Nmap 7.95 scan initiated Fri Feb 28 16:16:04 2025 as: nmap -p 1-1000 -sV --script vuln -Pn -oN nmap_scanme.nmap scanme.nmap.org
