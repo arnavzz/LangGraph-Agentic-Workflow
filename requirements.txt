@@ -1,3 +1,7 @@
 streamlit
 pandas
 streamlit-autorefresh
+streamlit
+langchain-groq
+langgraph
+python-dotenv
